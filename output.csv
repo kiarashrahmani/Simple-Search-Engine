@@ -1,0 +1,736 @@
+id,sentence
+1,What are recurrent neural networks?
+2,A recurrent neural network (RNN) is a type of artificial neural network which uses sequential data or time series data.
+3,"These deep learning algorithms are commonly used for ordinal or temporal problems, such as language translation, natural language processing (nlp), speech recognition, and image captioning; they are incorporated into popular applications such as Siri, voice search, and Google Translate."
+4,"Like feedforward and convolutional neural networks (CNNs), recurrent neural networks utilize training data to learn."
+5,They are distinguished by their “memory” as they take information from prior inputs to influence the current input and output.
+6,"While traditional deep neural networks assume that inputs and outputs are independent of each other, the output of recurrent neural networks depend on the prior elements within the sequence."
+7,"While future events would also be helpful in determining the output of a given sequence, unidirectional recurrent neural networks cannot account for these events in their predictions."
+8,"Let’s take an idiom, such as “feeling under the weather”, which is commonly used when someone is ill, to aid us in the explanation of RNNs."
+9,"In order for the idiom to make sense, it needs to be expressed in that specific order."
+10,"As a result, recurrent networks need to account for the position of each word in the idiom and they use that information to predict the next word in the sequence."
+11,Another distinguishing characteristic of recurrent networks is that they share parameters across each layer of the network.
+12,"While feedforward networks have different weights across each node, recurrent neural networks share the same weight parameter within each layer of the network."
+13,"That said, these weights are still adjusted in the through the processes of backpropagation and gradient descent to facilitate reinforcement learning."
+14,"Recurrent neural networks leverage backpropagation through time (BPTT) algorithm to determine the gradients, which is slightly different from traditional backpropagation as it is specific to sequence data."
+15,"The principles of BPTT are the same as traditional backpropagation, where the model trains itself by calculating errors from its output layer to its input layer."
+16,These calculations allow us to adjust and fit the parameters of the model appropriately.
+17,BPTT differs from the traditional approach in that BPTT sums errors at each time step whereas feedforward networks do not need to sum errors as they do not share parameters across each layer.
+18,"Through this process, RNNs tend to run into two problems, known as exploding gradients and vanishing gradients."
+19,"These issues are defined by the size of the gradient, which is the slope of the loss function along the error curve."
+20,"When the gradient is too small, it continues to become smaller, updating the weight parameters until they become insignificant—i.e."
+21,0.
+22,"When that occurs, the algorithm is no longer learning."
+23,"Exploding gradients occur when the gradient is too large, creating an unstable model."
+24,"In this case, the model weights will grow too large, and they will eventually be represented as NaN."
+25,"One solution to these issues is to reduce the number of hidden layers within the neural network, eliminating some of the complexity in the RNN model."
+26,"Types of recurrent neural networks: Feedforward networks map one input to one output, and while we’ve visualized recurrent neural networks in this way in the above diagrams, they do not actually have this constraint."
+27,"Instead, their inputs and outputs can vary in length, and different types of RNNs are used for different use cases, such as music generation, sentiment classification, and machine translation.A Brief Overview of Recurrent Neural Networks (RNN): This article was published as a part of the Data Science Blogathon."
+28,"Apple’s Siri and Google’s voice search both use Recurrent Neural Networks (RNNs), which are the state-of-the-art method for sequential data."
+29,"It’s the first algorithm with an internal memory that remembers its input, making it perfect for problems involving sequential data in machine learning."
+30,It’s one of the algorithms responsible for the incredible advances in deep learning over the last few years.
+31,"In this article, we’ll go over the fundamentals of recurrent neural networks, as well as the most pressing difficulties and how to address them."
+32,"Introduction on Recurrent Neural Networks
+A Deep Learning approach for modelling sequential data is Recurrent Neural Networks (RNN)."
+33,RNNs were the standard suggestion for working with sequential data before the advent of attention models.
+34,Specific parameters for each element of the sequence may be required by a deep feedforward model.
+35,It may also be unable to generalize to variable-length sequences.
+36,"Recurrent Neural Networks
+Source: Medium.com
+Recurrent Neural Networks use the same weights for each element of the sequence, decreasing the number of parameters and allowing the model to generalize to sequences of varying lengths."
+37,"RNNs generalize to structured data other than sequential data, such as geographical or graphical data, because of its design."
+38,"Recurrent neural networks, like many other deep learning techniques, are relatively old."
+39,"They were first developed in the 1980s, but we didn’t appreciate their full potential until lately."
+40,"The advent of long short-term memory (LSTM) in the 1990s, combined with an increase in computational power and the vast amounts of data that we now have to deal with, has really pushed RNNs to the forefront."
+41,What is a Recurrent Neural Network (RNN)?
+42,"Neural networks imitate the function of the human brain in the fields of AI, machine learning, and deep learning, allowing computer programs to recognize patterns and solve common issues.An Introduction to Recurrent Neural Networks and the Math That Powers Them:When it comes to sequential or time series data, traditional feedforward networks cannot be used for learning and prediction."
+43,A mechanism is required to retain past or historical information to forecast future values.
+44,"Recurrent neural networks, or RNNs for short, are a variant of the conventional feedforward artificial neural networks that can deal with sequential data and can be trained to hold knowledge about the past."
+45,"After completing this tutorial, you will know:
+
+Recurrent neural networks
+What is meant by unfolding an RNN
+How weights are updated in an RNN
+Various RNN architectures
+Kick-start your project with my book Building Transformer Models with Attention."
+46,"It provides self-study tutorials with working code to guide you into building a fully-working transformer model that can
+translate sentences from one language to another...
+
+Let’s get started."
+47,"This tutorial is divided into two parts; they are:
+
+The working of an RNN;
+Unfolding in time;
+Backpropagation through time algorithm;
+Different RNN architectures and variants."
+48,"An Introduction to Recurrent Neural Networks and the Math That Powers Them
+by Mehreen Saeed on January 6, 2023 in Attention 7
+Tweet Tweet  Share
+When it comes to sequential or time series data, traditional feedforward networks cannot be used for learning and prediction."
+49,A mechanism is required to retain past or historical information to forecast future values.
+50,"Recurrent neural networks, or RNNs for short, are a variant of the conventional feedforward artificial neural networks that can deal with sequential data and can be trained to hold knowledge about the past."
+51,"After completing this tutorial, you will know:
+
+Recurrent neural networks
+What is meant by unfolding an RNN
+How weights are updated in an RNN
+Various RNN architectures
+Kick-start your project with my book Building Transformer Models with Attention."
+52,"It provides self-study tutorials with working code to guide you into building a fully-working transformer model that can
+translate sentences from one language to another...
+
+Let’s get started."
+53,An introduction to recurrent neural networks and the math that powers Them.
+54,"Photo by Mehreen Saeed, some rights reserved."
+55,"Tutorial Overview
+This tutorial is divided into two parts; they are:
+
+The working of an RNN
+Unfolding in time
+Backpropagation through time algorithm
+Different RNN architectures and variants
+
+
+This tutorial assumes that you are already familiar with artificial neural networks and the backpropagation algorithm."
+56,"If not, you can go through this very nice tutorial, Calculus in Action: Neural Networks, by Stefania Cristina."
+57,The tutorial also explains how a gradient-based backpropagation algorithm is used to train a neural network.
+58,What Is a Recurrent Neural Network?
+59,A recurrent neural network (RNN) is a special type of artificial neural network adapted to work for time series data or data that involves sequences.
+60,Ordinary feedforward neural networks are only meant for data points that are independent of each other.
+61,"However, if we have data in a sequence such that one data point depends upon the previous data point, we need to modify the neural network to incorporate the dependencies between these data points."
+62,RNNs have the concept of “memory” that helps them store the states or information of previous inputs to generate the next output of the sequence.
+63,"Hence, in the feedforward pass of an RNN, the network computes the values of the hidden units and the output after 
+ time steps."
+64,The weights associated with the network are shared temporally.
+65,Each recurrent layer has two sets of weights: one for the input and the second for the hidden unit.
+66,"The last feedforward layer, which computes the final output for the kth time step, is just like an ordinary layer of a traditional feedforward network.What is deep learning?"
+67,Deep learning is a type of machine learning and artificial intelligence (AI) that imitates the way humans gain certain types of knowledge.
+68,"Deep learning models can be taught to perform classification tasks and recognize patterns in photos, text, audio and other various data."
+69,"It is also used to automate tasks that would normally need human intelligence, such as describing images or transcribing audio files."
+70,"Deep learning is an important element of data science, including statistics and predictive modeling."
+71,"It is extremely beneficial to data scientists who are tasked with collecting, analyzing and interpreting large amounts of data; deep learning makes this process faster and easier."
+72,"Where human brains have millions of interconnected neurons that work together to learn information, deep learning features neural networks constructed from multiple layers of software nodes that work together."
+73,Deep learning models are trained using a large set of labeled data and neural network architectures.
+74,Deep learning enables a computer to learn by example.
+75,"To understand deep learning, imagine a toddler whose first word is dog."
+76,The toddler learns what a dog is -- and is not -- by pointing to objects and saying the word dog.
+77,"The parent says, ""Yes, that is a dog,"" or, ""No, that is not a dog."""
+78,"As the toddler continues to point to objects, he becomes more aware of the features that all dogs possess."
+79,"What the toddler is doing, without knowing it, is clarifying a complex abstraction: the concept of dog."
+80,They are doing this by building a hierarchy in which each level of abstraction is created with knowledge that was gained from the preceding layer of the hierarchy.
+81,Why is deep learning important?
+82,Deep learning requires both a large amount of labeled data and computing power.
+83,"If an organization can accommodate for both needs, deep learning can be used in areas such as digital assistants, fraud detection and facial recognition."
+84,"Deep learning also has a high recognition accuracy, which is crucial for other potential applications where safety is a major factor, such as in autonomous cars or medical devices."
+85,How deep learning works?
+86,"Computer programs that use deep learning go through much the same process as a toddler learning to identify a dog, for example."
+87,"Deep learning programs have multiple layers of interconnected nodes, with each layer building upon the last to refine and optimize predictions and classifications."
+88,Deep learning performs nonlinear transformations to its input and uses what it learns to create a statistical model as output.
+89,Iterations continue until the output has reached an acceptable level of accuracy.
+90,The number of processing layers through which data must pass is what inspired the label deep.
+91,"In traditional machine learning, the learning process is supervised, and the programmer must be extremely specific when telling the computer what types of things it should be looking for to decide if an image contains a dog or does not contain a dog."
+92,"This is a laborious process called feature extraction, and the computer's success rate depends entirely upon the programmer's ability to accurately define a feature set for dog."
+93,The advantage of deep learning is the program builds the feature set by itself without supervision.
+94,"Initially, the computer program might be provided with training data -- a set of images for which a human has labeled each image dog or not dog with metatags."
+95,The program uses the information it receives from the training data to create a feature set for dog and build a predictive model.
+96,"In this case, the model the computer first creates might predict that anything in an image that has four legs and a tail should be labeled dog."
+97,"Of course, the program is not aware of the labels four legs or tail."
+98,It simply looks for patterns of pixels in the digital data.
+99,"With each iteration, the predictive model becomes more complex and more accurate."
+100,"Unlike the toddler, who takes weeks or even months to understand the concept of dog, a computer program that uses deep learning algorithms can be shown a training set and sort through millions of images, accurately identifying which images have dogs in them, within a few minutes."
+101,"To achieve an acceptable level of accuracy, deep learning programs require access to immense amounts of training data and processing power, neither of which were easily available to programmers until the era of big data and cloud computing."
+102,"Because deep learning programming can create complex statistical models directly from its own iterative output, it is able to create accurate predictive models from large quantities of unlabeled, unstructured data.Introduction to Deep Learning: Deep learning is a branch of machine learning which is based on artificial neural networks."
+103,It is capable of learning complex patterns and relationships within data.
+104,"In deep learning, we don’t need to explicitly program everything."
+105,It has become increasingly popular in recent years due to the advances in processing power and the availability of large datasets.
+106,Because it is based on artificial neural networks (ANNs) also known as deep neural networks (DNNs).
+107,"These neural networks are inspired by the structure and function of the human brain’s biological neurons, and they are designed to learn from large amounts of data."
+108,Deep Learning is a subfield of Machine Learning that involves the use of neural networks to model and solve complex problems.
+109,Neural networks are modeled after the structure and function of the human brain and consist of layers of interconnected nodes that process and transform data.
+110,"The key characteristic of Deep Learning is the use of deep neural networks, which have multiple layers of interconnected nodes."
+111,These networks can learn complex representations of data by discovering hierarchical patterns and features in the data.
+112,Deep Learning algorithms can automatically learn and improve from data without the need for manual feature engineering.
+113,"Deep Learning has achieved significant success in various fields, including image recognition, natural language processing, speech recognition, and recommendation systems."
+114,"Some of the popular Deep Learning architectures include Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), and Deep Belief Networks (DBNs)."
+115,Training deep neural networks typically requires a large amount of data and computational resources.
+116,"However, the availability of cloud computing and the development of specialized hardware, such as Graphics Processing Units (GPUs), has made it easier to train deep neural networks."
+117,"In summary, Deep Learning is a subfield of Machine Learning that involves the use of deep neural networks to model and solve complex problems."
+118,"Deep Learning has achieved significant success in various fields, and its use is expected to continue to grow as more data becomes available, and more powerful computing resources become available."
+119,What is Deep Learning?
+120,Deep learning is the branch of machine learning which is based on artificial neural network architecture.
+121,An artificial neural network or ANN uses layers of interconnected nodes called neurons that work together to process and learn from the input data.
+122,"In a fully connected Deep neural network, there is an input layer and one or more hidden layers connected one after the other."
+123,Each neuron receives input from the previous layer neurons or the input layer.
+124,"The output of one neuron becomes the input to other neurons in the next layer of the network, and this process continues until the final layer produces the output of the network."
+125,"The layers of the neural network transform the input data through a series of nonlinear transformations, allowing the network to learn complex representations of the input data."
+126,"Today Deep learning has become one of the most popular and visible areas of machine learning, due to its success in a variety of applications, such as computer vision, natural language processing, and Reinforcement learning."
+127,"Deep learning can be used for supervised, unsupervised as well as reinforcement machine learning."
+128,it uses a variety of ways to process these.
+129,Supervised Machine Learning: Supervised machine learning is the machine learning technique in which the neural network learns to make predictions or classify data based on the labeled datasets.
+130,Here we input both input features along with the target variables.
+131,"the neural network learns to make predictions based on the cost or error that comes from the difference between the predicted and the actual target, this process is known as backpropagation."
+132,"Deep learning algorithms like Convolutional neural networks, Recurrent neural networks are used for many supervised tasks like image classifications and recognization, sentiment analysis, language translations, etc."
+133,Unsupervised Machine Learning: Unsupervised machine learning is the machine learning technique in which the neural network learns to discover the patterns or to cluster the dataset based on unlabeled datasets.
+134,Here there are no target variables.
+135,while the machine has to self-determined the hidden patterns or relationships within the datasets.
+136,"Deep learning algorithms like autoencoders and generative models are used for unsupervised tasks like clustering, dimensionality reduction, and anomaly detection."
+137,Reinforcement  Machine Learning: Reinforcement  Machine Learning is the machine learning technique in which an agent learns to make decisions in an environment to maximize a reward signal.
+138,The agent interacts with the environment by taking action and observing the resulting rewards.
+139,"Deep learning can be used to learn policies, or a set of actions, that maximizes the cumulative reward over time."
+140,Deep reinforcement learning algorithms like Deep Q networks and Deep Deterministic Policy Gradient (DDPG) are used to reinforce tasks like robotics and game playing etc.
+141,What is Deep Learning?
+142,Deep learning is a method in artificial intelligence (AI) that teaches computers to process data in a way that is inspired by the human brain.
+143,"Deep learning models can recognize complex patterns in pictures, text, sounds, and other data to produce accurate insights and predictions."
+144,"You can use deep learning methods to automate tasks that typically require human intelligence, such as describing images or transcribing a sound file into text."
+145,Why is deep learning important?
+146,Artificial intelligence (AI) attempts to train computers to think and learn as humans do.
+147,"Deep learning technology drives many AI applications used in everyday products, such as the following:
+
+Digital assistants
+Voice-activated television remotes
+Fraud detection
+Automatic facial recognition
+It is also a critical component of emerging technologies such as self-driving cars, virtual reality, and more."
+148,Deep learning models are computer files that data scientists have trained to perform tasks using an algorithm or a predefined set of steps.
+149,Businesses use deep learning models to analyze data and make predictions in various applications.
+150,What are the uses of deep learning?
+151,"Deep learning has several use cases in automotive, aerospace, manufacturing, electronics, medical research, and other fields."
+152,"These are some examples of deep learning:
+
+Self-driving cars use deep learning models to automatically detect road signs and pedestrians."
+153,Defense systems use deep learning to automatically flag areas of interest in satellite images.
+154,Medical image analysis uses deep learning to automatically detect cancer cells for medical diagnosis.
+155,Factories use deep learning applications to automatically detect when people or objects are within an unsafe distance of machines.
+156,"You can group these various use cases of deep learning into four broad categories—computer vision, speech recognition, natural language processing (NLP), and recommendation engines."
+157,"Computer vision
+Computer vision is the computer's ability to extract information and insights from images and videos."
+158,Computers can use deep learning techniques to comprehend images in the same way that humans do.
+159,"Computer vision has several applications, such as the following:
+
+Content moderation to automatically remove unsafe or inappropriate content from image and video archives
+Facial recognition to identify faces and recognize attributes like open eyes, glasses, and facial hair
+Image classification to identify brand logos, clothing, safety gear, and other image details
+Speech recognition
+Deep learning models can analyze human speech despite varying speech patterns, pitch, tone, language, and accent."
+160,"Virtual assistants such as Amazon Alexa and automatic transcription software use speech recognition to do the following tasks:
+
+Assist call center agents and automatically classify calls."
+161,Convert clinical conversations into documentation in real time.
+162,Accurately subtitle videos and meeting recordings for a wider content reach.
+163,"Natural language processing
+Computers use deep learning algorithms to gather insights and meaning from text data and documents."
+164,"This ability to process natural, human-created text has several use cases, including in these functions:
+
+Automated virtual agents and chatbots
+Automatic summarization of documents or news articles
+Business intelligence analysis of long-form documents, such as emails and forms
+Indexing of key phrases that indicate sentiment, such as positive and negative comments on social media
+Recommendation engines
+Applications can use deep learning methods to track user activity and develop personalized recommendations."
+165,They can analyze the behavior of various users and help them discover new products or services.
+166,"For example, many media and entertainment companies, such as Netflix, Fox, and Peacock, use deep learning to give personalized video recommendations."
+167,How does deep learning work?
+168,Deep learning algorithms are neural networks that are modeled after the human brain.
+169,"For example, a human brain contains millions of interconnected neurons that work together to learn and process information."
+170,"Similarly, deep learning neural networks, or artificial neural networks, are made of many layers of artificial neurons that work together inside the computer."
+171,"Artificial neurons are software modules called nodes, which use mathematical calculations to process data."
+172,Artificial neural networks are deep learning algorithms that use these nodes to solve complex problems.
+173,What are the components of a deep learning network?
+174,The components of a deep neural network are the following.
+175,"Input layer
+An artificial neural network has several nodes that input data into it."
+176,These nodes make up the input layer of the system.
+177,"Hidden layer
+The input layer processes and passes the data to layers further in the neural network."
+178,"These hidden layers process information at different levels, adapting their behavior as they receive new information."
+179,Deep learning networks have hundreds of hidden layers that they can use to analyze a problem from several different angles.
+180,"For example, if you were given an image of an unknown animal that you had to classify, you would compare it with animals you already know."
+181,"For example, you would look at the shape of its eyes and ears, its size, the number of legs, and its fur pattern."
+182,"You would try to identify patterns, such as the following:
+
+The animal has hooves, so it could be a cow or deer."
+183,"The animal has cat eyes, so it could be some type of wild cat."
+184,The hidden layers in deep neural networks work in the same way.
+185,"If a deep learning algorithm is trying to classify an animal image, each of its hidden layers processes a different feature of the animal and tries to accurately categorize it."
+186,"Output layer
+The output layer consists of the nodes that output the data."
+187,"Deep learning models that output ""yes"" or ""no"" answers have only two nodes in the output layer."
+188,"On the other hand, those that output a wider range of answers have more nodes."
+189,What is deep learning in the context of machine learning?
+190,Deep learning is a subset of machine learning.
+191,Deep learning algorithms emerged in an attempt to make traditional machine learning techniques more efficient.
+192,Traditional machine learning methods require significant human effort to train the software.
+193,"For example, in animal image recognition, you need to do the following:
+
+Manually label hundreds of thousands of animal images."
+194,Make the machine learning algorithms process those images.
+195,Test those algorithms on a set of unknown images.
+196,Identify why some results are inaccurate.
+197,Improve the dataset by labeling new images to improve result accuracy.
+198,This process is called supervised learning.
+199,"In supervised learning, result accuracy improves only when you have a broad and sufficiently varied dataset."
+200,"For instance, the algorithm might accurately identify black cats but not white cats because the training dataset had more images of black cats."
+201,"In that case, you would need to label more white cat images and train the machine learning models once again.1."
+202,"Introduction to image processing
+Image processing is a method to perform some operations on an image, in order to get an enhanced image or to extract some useful information from it."
+203,It is a type of signal processing in which input is an image and output may be image or characteristics/features associated with that image.
+204,"Nowadays, image processing is among rapidly growing technologies."
+205,It forms core research area within engineering and computer science disciplines too.
+206,"Image processing basically includes the following three steps:
+
+Importing the image via image acquisition tools;
+Analysing and manipulating the image;
+Output in which result can be altered image or report that is based on image analysis."
+207,"There are two types of methods used for image processing namely, analogue and digital image processing."
+208,Analogue image processing can be used for the hard copies like printouts and photographs.
+209,Image analysts use various fundamentals of interpretation while using these visual techniques.
+210,Digital image processing techniques help in manipulation of the digital images by using computers.
+211,"The three general phases that all types of data have to undergo while using digital technique are pre-processing, enhancement, and display, information extraction."
+212,"In this lecture we will talk about a few fundamental definitions such as image, digital image, and digital image processing."
+213,Different sources of digital images will be discussed and examples for each source will be provided.
+214,The continuum from image processing to computer vision will be covered in this lecture.
+215,Finally we will talk about image acquisition and different types of image sensors.
+216,2.
+217,"Sampling and quantization
+In order to become suitable for digital processing, an image function f(x,y) must be digitized both spatially and in amplitude."
+218,"Typically, a frame grabber or digitizer is used to sample and quantize the analogue video signal."
+219,"Hence in order to create an image which is digital, we need to covert continuous data into digital form."
+220,"There are two steps in which it is done:
+
+Sampling
+Quantization
+The sampling rate determines the spatial resolution of the digitized image, while the quantization level determines the number of grey levels in the digitized image."
+221,A magnitude of the sampled image is expressed as a digital value in image processing.
+222,The transition between continuous values of the image function and its digital equivalent is called quantization.
+223,The number of quantization levels should be high enough for human perception of fine shading details in the image.
+224,The occurrence of false contours is the main problem in image which has been quantized with insufficient brightness levels.
+225,In this lecture we will talk about two key stages in digital image processing.
+226,Sampling and quantization will be defined properly.
+227,Spatial and grey-level resolutions will be introduced and examples will be provided.
+228,"An introduction on implementing the shown examples in MATLAB will be also given in this lecture.Digital Image Processing Basics:
+Digital Image Processing means processing digital image by means of a digital computer."
+229,"We can also say that it is a use of computer algorithms, in order to get enhanced image either to extract some useful information."
+230,Digital image processing is the use of algorithms and mathematical models to process and analyze digital images.
+231,"The goal of digital image processing is to enhance the quality of images, extract meaningful information from images, and automate image-based tasks."
+232,"The basic steps involved in digital image processing are:
+Image acquisition: This involves capturing an image using a digital camera or scanner, or importing an existing image into a computer."
+233,"Image enhancement: This involves improving the visual quality of an image, such as increasing contrast, reducing noise, and removing artifacts."
+234,"Image restoration: This involves removing degradation from an image, such as blurring, noise, and distortion."
+235,"Image segmentation: This involves dividing an image into regions or segments, each of which corresponds to a specific object or feature in the image."
+236,"Image representation and description: This involves representing an image in a way that can be analyzed and manipulated by a computer, and describing the features of an image in a compact and meaningful way."
+237,"Image analysis: This involves using algorithms and mathematical models to extract information from an image, such as recognizing objects, detecting patterns, and quantifying features."
+238,Image synthesis and compression: This involves generating new images or compressing existing images to reduce storage and transmission requirements.
+239,"Digital image processing is widely used in a variety of applications, including medical imaging, remote sensing, computer vision, and multimedia."
+240,"Image processing mainly include the following steps:
+1.Importing the image via image acquisition tools; 
+2.Analysing and manipulating the image; 
+3.Output in which result can be altered image or a report which is based on analysing that image."
+241,What is an image?
+242,"An image is defined as a two-dimensional function,F(x,y), where x and y are spatial coordinates, and the amplitude of F at any pair of coordinates (x,y) is called the intensity of that image at that point."
+243,"When x,y, and amplitude values of F are finite, we call it a digital image."
+244,"In other words, an image can be defined by a two-dimensional array specifically arranged in rows and columns."
+245,"Digital Image is composed of a finite number of elements, each of which elements have a particular value at a particular location.These elements are referred to as picture elements,image elements,and pixels.A Pixel is most widely used to denote the elements of a Digital Image."
+246,"Types of an image
+BINARY IMAGE– The binary image as its name suggests, contain only two pixel elements i.e 0 & 1,where 0 refers to black and 1 refers to white."
+247,This image is also known as Monochrome.
+248,BLACK AND WHITE IMAGE– The image which consist of only black and white color is called BLACK AND WHITE IMAGE.
+249,8 bit COLOR FORMAT– It is the most famous image format.It has 256 different shades of colors in it and commonly known as Grayscale Image.
+250,"In this format, 0 stands for Black, and 255 stands for white, and 127 stands for gray."
+251,16 bit COLOR FORMAT– It is a color image format.
+252,"It has 65,536 different colors in it.It is also known as High Color Format."
+253,In this format the distribution of color is not as same as Grayscale image.
+254,"A 16 bit format is actually divided into three further formats which are Red, Green and Blue."
+255,That famous RGB format.
+256,"PHASES OF IMAGE PROCESSING:
+1.ACQUISITION– It could be as simple as being given an image which is in digital form."
+257,"The main work involves: 
+a) Scaling 
+b) Color conversion(RGB to Gray or vice-versa) 
+2.IMAGE ENHANCEMENT– It is amongst the simplest and most appealing in areas of Image Processing it is also used to extract some hidden details from an image and is subjective."
+258,3.IMAGE RESTORATION– It also deals with appealing of an image but it is objective(Restoration is based on mathematical or probabilistic model or image degradation).
+259,4.COLOR IMAGE PROCESSING– It deals with pseudocolor and full color image processing color models are applicable to digital image processing.
+260,5.WAVELETS AND MULTI-RESOLUTION PROCESSING– It is foundation of representing images in various degrees.
+261,6.IMAGE COMPRESSION-It involves in developing some functions to perform this operation.
+262,It mainly deals with image size or resolution.
+263,7.MORPHOLOGICAL PROCESSING-It deals with tools for extracting image components that are useful in the representation & description of shape.
+264,8.SEGMENTATION PROCEDURE-It includes partitioning an image into its constituent parts or objects.
+265,Autonomous segmentation is the most difficult task in Image Processing.
+266,"9.REPRESENTATION & DESCRIPTION-It follows output of segmentation stage, choosing a representation is only the part of solution for transforming raw data into processed data."
+267,10.OBJECT DETECTION AND RECOGNITION-It is a process that assigns a label to an object based on its descriptor.
+268,"Advantages of Digital Image Processing:
+Improved image quality: Digital image processing algorithms can improve the visual quality of images, making them clearer, sharper, and more informative."
+269,"Automated image-based tasks: Digital image processing can automate many image-based tasks, such as object recognition, pattern detection, and measurement."
+270,"Increased efficiency: Digital image processing algorithms can process images much faster than humans, making it possible to analyze large amounts of data in a short amount of time."
+271,"Increased accuracy: Digital image processing algorithms can provide more accurate results than humans, especially for tasks that require precise measurements or quantitative analysis.Images define the world, each image has its own story, it contains a lot of crucial information that can be useful in many ways."
+272,This information can be obtained with the help of the technique known as Image Processing.
+273,"It is the core part of computer vision which plays a crucial role in many real-world examples like robotics, self-driving cars, and object detection."
+274,Image processing allows us to transform and manipulate thousands of images at a time and extract useful insights from them.
+275,It has a wide range of applications in almost every field.
+276,Python is one of the widely used programming languages for this purpose.
+277,Its amazing libraries and tools help in achieving the task of image processing very efficiently.
+278,"This article will teach you about classical algorithms, techniques, and tools to process the image and get the desired output."
+279,Let’s get into it!
+280,What is image processing?
+281,"As the name says, image processing means processing the image and this may include many different techniques until we reach our goal."
+282,The final output can be either in the form of an image or a corresponding feature of that image.
+283,This can be used for further analysis and decision making.
+284,But what is an image?
+285,"An image can be represented as a 2D function F(x,y) where x and y are spatial coordinates."
+286,"The amplitude of F at a particular value of x,y is known as the intensity of an image at that point."
+287,"If x,y, and the amplitude value is finite then we call it a digital image."
+288,It is an array of pixels arranged in columns and rows.
+289,Pixels are the elements of an image that contain information about intensity and color.
+290,"An image can also be represented in 3D where x,y, and z become spatial coordinates."
+291,Pixels are arranged in the form of a matrix.
+292,This is known as an RGB image.
+293,Digital image processing consists of the manipulation of images using digital computers.
+294,Its use has been increasing exponentially in the last decades.
+295,"Its applications range from medicine to entertainment, passing by geological processing and remote sensing."
+296,"Multimedia systems, one of the pillars of the modern information society, rely heavily on digital image processing."
+297,"The discipline of digital image processing is a vast one, encompassing digital signal processing techniques as well as techniques that are specific to images."
+298,"An image can be regarded as a function f (x, y) of two continuous variables x and y."
+299,"To be processed digitally, it has to be sampled and transformed into a matrix of numbers."
+300,"Since a computer represents the numbers using finite precision, these numbers have to be quantized to be represented digitally."
+301,Digital image processing consists of the manipulation of those finite precision numbers.
+302,"The processing of digital images can be divided into several classes: image enhancement, image restoration, image analysis, and image compression."
+303,"In image enhancement, an image is manipulated, mostly by heuristic techniques, so that a human viewer can extract useful information from it."
+304,Image restoration techniques aim at processing corrupted images from which there is a statistical or mathematical description of the degradation so that it can be reverted.
+305,Image analysis techniques permit that an image be processed so that information can be automatically extracted from it.
+306,"Examples of image analysis are image segmentation, edge extraction, and texture and motion analysis."
+307,An important characteristic of images is the huge amount of information required to represent them.
+308,"Even a gray-scale image of moderate resolution, say 512 × 512, needs 512 × 512 × 8 ?"
+309,2 × 106 bits for its representation.
+310,"Therefore, to be practical to store and transmit digital images, one needs to perform some sort of image compression, whereby the redundancy of the images is exploited for reducing the number of bits needed in their representation."
+311,"In what follows, we provide a brief description of digital image processing techniques."
+312,"Section 4.1 deals with image sampling, and Section 4.2 describes image quantization."
+313,"In Section 4.3, some image enhancement techniques are given."
+314,Section 4.4 analyzes image restoration.
+315,"Image compression, or coding, is presented in Section 4.5."
+316,"Finally, Section 4.6 introduces the main issues involved in image analysis."
+317,This chapter deals with the manipulation and analysis of images by computer.
+318,"In image processing, both the input and the output are images, the output being, for example, an approximated or improved version of the input."
+319,"In image analysis (also known by such names as pictorial pattern recognition, image understanding, and computer vision), the input is an image and the output is (typically) a description of the scene that gave rise to the image."
+320,"Computer graphics, which is not covered in this chapter, is the inverse of image analysis: The input is a scene description, and the output is an image of the scene as it would appear from a given viewpoint."
+321,"An image is defined by specifying how its value (brightness, color, etc.)"
+322,"varies from point to point—in other words, by a function of two variables defined over an “image plane.” Before an image can be processed and analyzed by (digital) computer, it must be converted into a discrete array of numbers each of which represents the value at a given point."
+323,This process of conversion is called digitization (Section II).
+324,A digitized image can be viewed as a matrix of gray-level values.
+325,"To understand/analyze the structure of this matrix, image models and image transforms have been used."
+326,"Image models attempt to describe the image data quantatively, while image transforms enable the analysis of the image data in the transform domain for various applications such as compression, restoration, and filtering.Image models and representations are discussed in Section III."
+327,"To represent the input image with sufficient accuracy, the array of numbers must usually be quite large—for example, about 500 × 500 in the case of a television image."
+328,Image compression (or coding) deals with methods of reducing this large quantity of data without sacrificing important information about the image (Section IV).
+329,"One of the central goals of image processing is to improve the appearance of the image—for example, by increasing contrast, reducing blur, or removing noise."
+330,Image enhancement (Section V) deals with methods of improving the appearance of an image.
+331,"More specifically, image restoration (Section VI) is concerned with estimating image degradations and attempting to correct them."
+332,Another important branch of image processing is image reconstruction from projections (Section VII).
+333,"Here we are given a set of images (e.g., X rays) representing projections of a given volume, and the task is to compute and display images representing cross sections of that volume."
+334,Comparison or matching of images is an important tool in both image processing and analysis.
+335,Section VIII discusses image matching and registration and depth measurement by comparison of images taken from different positions (stereomapping).
+336,Section IX summarizes methods for the analysis of image sequences.
+337,"Techniques for motion compensation, detection and tracking of moving objects, and recovery of scene structure from motion using optic flow and discrete features are discussed."
+338,"The brightness of an image at a point depends on many factors, including the illumination, reflectivity, and surface orientation of the corresponding surface point in the scene."
+339,"Section X discusses methods of recovering these “intrinsic” scene characteristics from an image by analyzing shading, texture, or shapes in the image."
+340,"Image analysis usually begins with feature detection or segmentation—the extraction of parts of an image, such as edges, curves, or regions, that are relevant to its description."
+341,Techniques for singling out significant parts of an image are reviewed in Section XI.
+342,"Methods of compactly representing image parts for computer manipulation, as well as methods of decomposing image parts based on geometric criteria and of computing geometric properties of image parts, are treated in Section XII."
+343,"Section XIII deals with image description, with an emphasis on the problem of recognizing objects in an image."
+344,"It reviews properties and relations, relational structures, models, and knowledge-based image analysis."
+345,A chapter such as this would not be complete without some discussion of architectures designed for efficient processing of images.
+346,The eighties witnessed an explosion of parallel algorithms and architectures for image processing and analysis; especially noteworthy were hypercube-connected machines.
+347,In the early nineties attention was focused on special processors such as pyramid machines.
+348,"Recently, emphasis is being given to embedded processors and field-programmable gate arrays."
+349,Section XIV presents a summary of these developments.
+350,"The treatment in this chapter is concept-oriented; applications are not discussed, and the use of mathematics has been minimized, although some understanding of Fourier transforms, stochastic processes, estimation theory, and linear algebra is occasionally assumed."
+351,"The Bibliography lists basic textbooks, as well as a recent survey article that celebrated 50 years of progress in image processing and analysis."
+352,"Since an earlier version of this chapter appeared in 1986, image processing and analysis have grown so dramatically in depth and breadth that it is nearly impossible to cover all their subareas in detail."
+353,"To adhere to our page limitations, we have made a conscientious selection of topics for discussion."
+354,"We avoid discussion of topics such as scanners, display devices, and hardware and software issues."
+355,"On the other hand, since the mideighties, much to our delight, the field has been supported by a strong underlying analytical framework based on mathematics, statistics, and physics."
+356,"We point out the influence of these fields on image processing, analysis, understanding, and computer vision."
+357,Statistical models called hidden Markov models are a recurring theme in computational biology.
+358,"What are hidden Markov models, and why are they so useful for so many different problems?"
+359,"Often, biological sequence analysis is just a matter of putting the right label on each residue."
+360,"In gene identification, we want to label nucleotides as exons, introns, or intergenic sequence."
+361,"In sequence alignment, we want to associate residues in a query sequence with homologous residues in a target database sequence."
+362,"We can always write an ad hoc program for any given problem, but the same frustrating issues will always recur."
+363,One is that we want to incorporate heterogeneous sources of information.
+364,"A genefinder, for instance, ought to combine splice-site consensus, codon bias, exon/ intron length preferences and open reading frame analysis into one scoring system."
+365,How should these parameters be set?
+366,How should different kinds of information be weighted?
+367,A second issue is to interpret results probabilistically.
+368,"Finding a best scoring answer is one thing, but what does the score mean, and how confident are we that the best scoring answer is correct?"
+369,A third issue is extensibility.
+370,"The moment we perfect our ad hoc genefinder, we wish we had also modeled translational initiation consensus, alternative splicing and a polyadenylation signal."
+371,"Too often, piling more reality onto a fragile ad hoc program makes it collapse under its own weight."
+372,"Hidden Markov models (HMMs) are a formal foundation for making probabilistic models of linear sequence 'labeling' problems1,2."
+373,They provide a conceptual toolkit for building complex models just by drawing an intuitive picture.
+374,"They are at the heart of a diverse range of programs, including genefinding, profile searches, multiple sequence alignment and regulatory site identification."
+375,HMMs are the Legos of computational sequence analysis.
+376,A toy HMM: 5?
+377,"splice site recognition
+
+As a simple example, imagine the following caricature of a 5?"
+378,splice-site recognition problem.
+379,"Assume we are given a DNA sequence that begins in an exon, contains one 5?"
+380,splice site and ends in an intron.
+381,The problem is to identify where the switch from exon to intron occurred—where the 5?
+382,splice site (5?SS) is.
+383,"For us to guess intelligently, the sequences of exons, splice sites and introns must have different statistical properties."
+384,"Let's imagine some simple differences: say that exons have a uniform base composition on average (25% each base), introns are A/T rich (say, 40% each for A/T, 10% each for C/G), and the 5?SS consensus nucleotide is almost always a G (say, 95% G and 5% A)."
+385,"Starting from this information, we can draw an HMM (Fig."
+386,1).
+387,"The HMM invokes three states, one for each of the three labels we might assign to a nucleotide: E (exon), 5 (5?SS) and I (intron)."
+388,"Each state has its own emission probabilities (shown above the states), which model the base composition of exons, introns and the consensus G at the 5?SS."
+389,"Each state also has transition probabilities (arrows), the probabilities of moving from this state to a new state."
+390,"The transition probabilities describe the linear order in which we expect the states to occur: one or more Es, one 5, one or more Is."
+391,"So, what's hidden?"
+392,It's useful to imagine an HMM generating a sequence.
+393,"When we visit a state, we emit a residue from the state's emission probability distribution."
+394,"Then, we choose which state to visit next according to the state's transition probability distribution."
+395,The model thus generates two strings of information.
+396,"One is the underlying state path (the labels), as we transition from state to state."
+397,"The other is the observed sequence (the DNA), each residue being emitted from one state in the state path."
+398,"The state path is a Markov chain, meaning that what state we go to next depends only on what state we're in."
+399,"Since we're only given the observed sequence, this underlying state path is hidden—these are the residue labels that we'd like to infer."
+400,The state path is a hidden Markov chain.
+401,"The probability P(S,?|HMM,?)"
+402,that an HMM with parameters ?
+403,generates a state path ?
+404,and an observed sequence S is the product of all the emission probabilities and transition probabilities that were used.
+405,"For example, consider the 26-nucleotide sequence and state path in the middle of Figure 1, where there are 27 transitions and 26 emissions to tote up."
+406,"Multiply all 53 probabilities together (and take the log, since these are small numbers) and you'll calculate log P(S,?|HMM,?)"
+407,= ?41.22.
+408,An HMM is a full probabilistic model—the model parameters and the overall sequence 'scores' are all probabilities.
+409,"Therefore, we can use Bayesian probability theory to manipulate these numbers in standard, powerful ways, including optimizing parameters and interpreting the significance of scores."
+410,"Finding the best state path
+
+In an analysis problem, we're given a sequence, and we want to infer the hidden state path."
+411,There are potentially many state paths that could generate the same sequence.
+412,We want to find the one with the highest probability.
+413,"For example, if we were given the HMM and the 26-nucleotide sequence in Figure 1, there are 14 possible paths that have non-zero probability, since the 5?SS must fall on one of 14 internal As or Gs."
+414,Figure 1 enumerates the six highest-scoring paths (those with G at the 5?SS).
+415,"The best one has a log probability of ?41.22, which infers that the most likely 5?SS position is at the fifth G.
+
+For most problems, there are so many possible state sequences that we could not afford to enumerate them."
+416,The efficient Viterbi algorithm is guaranteed to find the most probable state path given a sequence and an HMM.
+417,The Viterbi algorithm is a dynamic programming algorithm quite similar to those used for standard sequence alignment.
+418,"Beyond best scoring alignments
+
+Figure 1 shows that one alternative state path differs only slightly in score from putting the 5?SS at the fifth G (log probabilities of ?41.71 versus ?41.22)."
+419,How confident are we that the fifth G is the right choice?
+420,This is an example of an advantage of probabilistic modeling: we can calculate our confidence directly.
+421,"The probability that residue i was emitted by state k is the sum of the probabilities of all the state paths that use state k to generate residue i (that is, ?i = k in the state path ?"
+422,"), normalized by the sum over all possible state paths."
+423,"In our toy model, this is just one state path in the numerator and a sum over 14 state paths in the denominator."
+424,We get a probability of 46% that the best-scoring fifth G is correct and 28% that the sixth G position is correct (Fig.
+425,"1, bottom)."
+426,This is called posterior decoding.
+427,"For larger problems, posterior decoding uses two dynamic programming algorithms called Forward and Backward, which are essentially like Viterbi, but they sum over possible paths instead of choosing the best."
+428,"Making more realistic models
+
+Making an HMM means specifying four things: (i) the symbol alphabet, K different symbols (e.g., ACGT, K = 4); (ii) the number of states in the model, M; (iii) emission probabilities ei(x) for each state i, that sum to one over K symbols x, ?xei(x) = 1; and (iv) transition probabilities ti(j) for each state i going to any other state j (including itself) that sum to one over the M states j, ?jti(j) = 1."
+429,Any model that has these properties is an HMM.
+430,"This means that one can make a new HMM just by drawing a picture corresponding to the problem at hand, like Figure 1."
+431,This graphical simplicity lets one focus clearly on the biological definition of a problem.
+432,"For example, in our toy splice-site model, maybe we're not happy with our discrimination power; maybe we want to add a more realistic six-nucleotide consensus GTRAGT at the 5?"
+433,splice site.
+434,"We can put a row of six HMM states in place of '5' state, to model a six-base ungapped consensus motif, parameterizing the emission probabilities on known 5?"
+435,splice sites.
+436,"And maybe we want to model a complete intron, including a 3?"
+437,"splice site; we just add a row of states for the 3?SS consensus, and add a 3?"
+438,exon state to let the observed sequence end in an exon instead of an intron.
+439,"Then maybe we want to build a complete gene model...whatever we add, it's just a matter of drawing what we want."
+440,"The catch
+
+HMMs don't deal well with correlations between residues, because they assume that each residue depends only on one underlying state."
+441,An example where HMMs are usually inappropriate is RNA secondary structure analysis.
+442,"Conserved RNA base pairs induce long-range pairwise correlations; one position might be any residue, but the base-paired partner must be complementary."
+443,An HMM state path has no way of 'remembering' what a distant state generated.How do you know your spouse is happy or not?
+444,Any couple will tell you it can be hard.
+445,"In machine learning ML, many internal states are hard to determine or observe."
+446,An alternative is to determine them from observable external factors.
+447,That is what HMM solves.
+448,"For example, in speech recognition, we listen to a speech (the observable) to deduce its script (the internal state representing the speech)."
+449,"First, let’s look at some commonly-used definitions first."
+450,"Markov process/Markov chains
+A first-order Markov process is a stochastic process in which the future state solely depends on the current state only."
+451,The first-order Markov process is often simply called the Markov process.
+452,"If it is in a discrete space, it is called the Markov chain."
+453,The assumption of the Markov process may not be true in reality.
+454,"But even it is not true, we can model extra states in the system to make it closer to the Markov process sometimes."
+455,"In practice, the Markov process can be an appropriate approximation in solving complex ML and reinforcement learning problems."
+456,"In addition, the probability of the transition from one state to another can be packed into a transition matrix like the one below:
+This transition matrix is also called the Markov matrix."
+457,The element ij is the probability of transiting from state j to state i.
+458,"Note, some literature may use a transposed notation where each element is the probability of transiting from state i to j instead."
+459,"The columns of a Markov matrix add up to one, i.e."
+460,the probability of reaching a state from any possible state is one.
+461,"Once, it is defined as a matrix, we can use linear algebra and eigenvector to determine its stable state if existed, i.e."
+462,"if we keep going for a long time, what is the probability of being at a particular state?"
+463,"To solve that, let’s have a quick review of eigenvectors first."
+464,Eigenvector v?
+465,and eigenvalue ?
+466,?
+467,of the matrix A fulfill the following relation.
+468,"(Note, matrix A can have many eigenvectors.)"
+469,Our state at time k+1 is related to the previous step by the Markov matrix which the stable state is determined with k approaches ?.
+470,Consider a vector v?
+471,in ?
+472,?.
+473,We can represent it using the eigenvectors of A.
+474,"Using the equation above, the state of v at time step k+1 will become (the inner product of two different eigenvectors equals zero)
+If v converges in time, v will have a stable state."
+475,u?
+476,can be chosen to be unit vectors.
+477,"In order for v to converge, eigenvalues ?"
+478,?
+479,must be smaller or equal to 1.
+480,"Otherwise, ?v?"
+481,will continue to grow.
+482,A Markov matrix always has an eigenvalue 1.
+483,All other eigenvalues will have a magnitude smaller or equal to 1.
+484,"Let’s say, the eigenvector u?"
+485,"(say [0.2, 0.5, 0.3]) has an eigenvalue of 1."
+486,"Then, u?"
+487,"will be the stable state, i.e."
+488,"we have 0.2, 0.5, and 0.3 chance to be in states 1, 2, or 3 respectively as the time approaches infinity."
+489,"Note, the solution is independent of the initial state."
+490,We end up with the same target distribution regardless of where we start.
+491,(More details can be found here.)
+492,"In theory, we can have more than one eigenvectors with eigenvalues equal to one."
+493,"However, in practice, real problems usually have only one."
+494,"In fact, if all elements in the matrix are greater than zero, there is exactly one eigenvector with eigenvalue equals to one."
+495,"Random walk
+
+Calculating an exact solution can be computationally intensive."
+496,"Alternatively, Markov processes can be solved using random walks."
+497,Let’s say we drop off 100 shoppers randomly around the downtown area in San Franciso.
+498,We provide a transition matrix to show the probability of where the shoppers may head next in the current position.
+499,"Eventually, we can spot where most interesting shops are located."
+500,This strategy allows us to use local information to understand the general structure of the data.
+501,"In many ML problems, it is much easier to collect."
+502,We don’t need to understand the structure of the data.
+503,We don’t need to understand how the city plans its shopping districts.
+504,Just look around and see what may be more interesting.
+505,"In addition, the transition matrix is mostly sparse in many problems."
+506,This random walk concept is very popular in ranking or making product recommendations.
+507,"As we continue the iterations, our random walk will converge to the stable state that we are interested in."
+508,"For very large scale problems, this may be easier to execute and to compute."
+509,"Hidden Markov Model (HMM)
+In many ML problems, we assume the sampled data is i.i.d."
+510,This simplifies the maximum likelihood estimation (MLE) and makes the math much simpler to solve.
+511,"But for the time sequence model, states are not completely independent."
+512,"If I am happy now, I will be more likely to stay happy tomorrow."
+513,"In many ML problems, the states of a system may not be observable or fully observable."
+514,But we can get insights about this internal state through the observables.
+515,"For example, if I am happy, there is a 40% chance that I will go to a party."
+516,But there is a 10% chance that I will be found at a party when I am sad too.
+517,"With HMM, we determine the internal state (happy or sad) by making observations — where I was found."
+518,HMM models a process with a Markov process.
+519,It includes the initial state distribution ?
+520,"(the probability distribution of the initial state)
+The transition probabilities A from one state (xt) to another."
+521,HMM also contains the likelihood B of the observation (yt) given a hidden state.
+522,Matrix B is called the emission probabilities.
+523,It demonstrates the probability of our observation given a specific internal state.
+524,The complexity of the problem is that the same observations may be originated from different states (happy or not).
+525,The equation above uses the transition probability and the emission probability to compute the probability of the internal state based on all observations.
+526,"Depending on the situation, we usually ask three different types of questions regarding an HMM problem."
+527,Likelihood: How likely are the observations based on the current model or the probability of being at a state at a specific time step.
+528,Decoding: Find the internal state sequence based on the current model and observations.
+529,Learning.
+530,Learn the HMM model.
+531,The remaining section details the solution.
+532,Read through it according to your level of interest.
+533,"Likelihood (likelihood of the observation)
+
+Likelihood is to find the likelihood of observation Y."
+534,This is computationally intense.
+535,But we can do it smartly to avoid summing all possible state sequences one-by-one and to share results for other computations.
+536,"Otherwise, the complexity will grow exponentially."
+537,Our strategy will employ a divide-and-conquer.
+538,"In specifically, if we can express components recursively, we can break down the problem into intermediate steps and share results."
+539,"In HMM, we solve the problem at time t by using the result from time t-1 and/or t+1."
+540,"A circle below represents an HMM hidden state j at time t. So even the number of state sequence increases exponentially with time, we can solve it linear if we can express the calculation recursively with time.Hidden Markov models (HMMs) are a type of statistical modeling that has been used for several years."
+541,"They have been applied in different fields such as medicine, computer science, and data science."
+542,The Hidden Markov model (HMM) is the foundation of many modern-day data science algorithms.
+543,It has been used in data science to make efficient use of observations for successful predictions or decision-making processes.
+544,This blog post will cover hidden Markov models with real-world examples and important concepts related to hidden Markov models.
+545,What are Markov Models?
+546,"Markov models are named after Andrey Markov, who first developed them in the early 1900s."
+547,"Markov models are a type of probabilistic model that is used to predict the future state of a system, based on its current state."
+548,"In other words, Markov models are used to predict the future state based on the current hidden or observed states."
+549,Markov model is a finite-state machine where each state has an associated probability of being in any other state after one step.
+550,They can be used to model real-world problems where hidden and observable states are involved.
+551,Markov models can be classified into hidden and observable based on the type of information available to use for making predictions or decisions.
+552,"Hidden Markov models deal with hidden variables that cannot be directly observed but only inferred from other observations, whereas in an observable model also termed as Markov chain, hidden variables are not involved."
+553,"To better understand Markov models, let’s look at an example."
+554,Say you have a bag of marbles that contains four marbles: two red marbles and two blue marbles.
+555,"You randomly select a marble from the bag, note its color, and then put it back in the bag."
+556,"After repeating this process several times, you begin to notice a pattern: The probability of selecting a red marble is always two out of four, or 50%."
+557,This is because the probability of selecting a particular color of marble is determined by the number of that color of marble in the bag.
+558,"In other words, the past history (i.e., the contents of the bag) determines the future state (i.e., the probability of selecting a particular color of marble)."
+559,This example illustrates the concept of a Markov model: the future state of a system is determined by its current state and past history.
+560,"In the case of the bag of marbles, the current state is determined by the number of each color of marble in the bag."
+561,"The past history is represented by the contents of the bag, which determine the probabilities of selecting each color of marble."
+562,"Markov models have many applications in the real world, including predicting the weather, stock market prices, and the spread of disease."
+563,Markov models are also used in natural language processing applications such as speech recognition and machine translation.
+564,"In speech recognition, Markov models are used to identify the correct word or phrase based on the context of the sentence."
+565,"In machine translation, Markov models are used to select the best translation for a sentence based on the translation choices made for previous sentences in the text."
+566,What is Markov Chain?
+567,"Markov chains, named after Andrey Markov, can be thought of as a machine or a system that hops from one state to another, typically forming a chain."
+568,"Markov chains have the Markov property, which states that the probability of moving to any particular state next depends only on the current state and not on the previous states."
+569,"A Markov chain consists of three important components:
+
+Initial probability distribution: An initial probability distribution over states, ?i is the probability that the Markov chain will start in a certain state i."
+570,"Some states j may have ?j = 0, meaning that they cannot be initial states
+One or more states
+Transition probability distribution: A transition probability matrix A where each [latex]a_{ij}[/latex] represents the probability of moving from state I to state j
+The diagram below represents a Markov chain where there are three states representing the weather of the day (cloudy, rainy, and sunny)."
+571,"And, there are transition probabilities representing the weather of the next day given the weather of the current day."
+572,"There are three different states such as cloudy, rain, and sunny."
+573,"The following represent the transition probabilities based on the above diagram:
+
+If sunny today, then tomorrow:
+50% probability for sunny
+10% probability for rainy
+40% probability for cloudy
+If rainy today, then tomorrow:
+10% probability for sunny
+60% probability for rainy
+30% probability for cloudy
+If cloudy today, then tomorrow:
+40% probability for sunny
+50% probability for rainy
+10% probability for cloudy
+Using this Markov chain, what is the probability that the Wednesday will be cloudy if today is sunny."
+574,The following are different transitions that can result in a cloudy Wednesday given today (Monday) is sunny.
+575,"Sunny – Sunny (Tuesday) – Cloudy (Wednesday): The probability to a cloudy Wednesday can be calculated as 0.5 x 0.4 = 0.2
+Sunny – Rainy (Tuesday) – Cloudy (Wednesday): The probability of a cloudy Wednesday can be calculated as 0.1 x 0.3 = 0.03
+Sunny – Cloudy (Tuesday) – Cloudy (Wednesday): The probability of a cloudy Wednesday can be calculated as 0.4 x 0.1 = 0.04
+The total probability of a cloudy Wednesday = 0.2 + 0.03 + 0.04 = 0.27."
+576,"As shown above, the Markov chain is a process with a known finite number of states in which the probability of being in a particular state is determined only by the previous state."
+577,What are Hidden Markov models (HMM)?
+578,The hidden Markov model (HMM) is another type of Markov model where there are few states which are hidden.
+579,This is where HMM differs from a Markov chain.
+580,HMM is a statistical model in which the system being modeled are Markov processes with unobserved or hidden states.
+581,It is a hidden variable model which can give an observation of another hidden state with the help of the Markov assumption.
+582,The hidden state is the term given to the next possible variable which cannot be directly observed but can be inferred by observing one or more states according to Markov’s assumption.
+583,Markov assumption is the assumption that a hidden variable is dependent only on the previous hidden state.
+584,"Mathematically, the probability of being in a state at a time t depends only on the state at the time (t-1)."
+585,It is termed a limited horizon assumption.
+586,"Another Markov assumption states that the conditional distribution over the next state, given the current state, doesn’t change over time."
+587,This is also termed a stationary process assumption.
+588,A Markov model  is made up of two components: the state transition and hidden random variables that are conditioned on each other.
+589,"However, A hidden Markov model consists of five important components:
+
+Initial probability distribution: An initial probability distribution over states, ?i is the probability that the Markov chain will start in state i."
+590,"Some states j may have ?j = 0, meaning that they cannot be initial states."
+591,The initialization distribution defines each hidden variable in its initial condition at time t=0 (the initial hidden state).
+592,"One or more hidden states
+Transition probability distribution: A transition probability matrix where each [latex]a_{ij}[/latex] represents the probability of moving from state i to state j."
+593,The transition matrix is used to show the hidden state to hidden state transition probabilities.
+594,"A sequence of observations
+Emission probabilities: A sequence of observation likelihoods, also called emission probabilities, each expressing the probability of an observation [latex]o_{i}[/latex] being generated from a state I."
+595,The emission probability is used to define the hidden variable in terms of its next hidden state.
+596,It represents the conditional distribution over an observable output for each hidden state at time t=0.
