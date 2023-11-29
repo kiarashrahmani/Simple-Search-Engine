@@ -1,0 +1,15 @@
+A Brief Overview of Recurrent Neural Networks (RNN): This article was published as a part of the Data Science Blogathon.
+
+Apple’s Siri and Google’s voice search both use Recurrent Neural Networks (RNNs), which are the state-of-the-art method for sequential data. It’s the first algorithm with an internal memory that remembers its input, making it perfect for problems involving sequential data in machine learning. It’s one of the algorithms responsible for the incredible advances in deep learning over the last few years. In this article, we’ll go over the fundamentals of recurrent neural networks, as well as the most pressing difficulties and how to address them.
+
+Introduction on Recurrent Neural Networks
+A Deep Learning approach for modelling sequential data is Recurrent Neural Networks (RNN). RNNs were the standard suggestion for working with sequential data before the advent of attention models. Specific parameters for each element of the sequence may be required by a deep feedforward model. It may also be unable to generalize to variable-length sequences.
+
+Recurrent Neural Networks
+Source: Medium.com
+Recurrent Neural Networks use the same weights for each element of the sequence, decreasing the number of parameters and allowing the model to generalize to sequences of varying lengths. RNNs generalize to structured data other than sequential data, such as geographical or graphical data, because of its design.
+
+Recurrent neural networks, like many other deep learning techniques, are relatively old. They were first developed in the 1980s, but we didn’t appreciate their full potential until lately. The advent of long short-term memory (LSTM) in the 1990s, combined with an increase in computational power and the vast amounts of data that we now have to deal with, has really pushed RNNs to the forefront.
+
+What is a Recurrent Neural Network (RNN)?
+Neural networks imitate the function of the human brain in the fields of AI, machine learning, and deep learning, allowing computer programs to recognize patterns and solve common issues.

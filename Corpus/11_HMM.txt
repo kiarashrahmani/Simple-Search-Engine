@@ -1,0 +1,53 @@
+How do you know your spouse is happy or not? Any couple will tell you it can be hard. In machine learning ML, many internal states are hard to determine or observe. An alternative is to determine them from observable external factors. That is what HMM solves. For example, in speech recognition, we listen to a speech (the observable) to deduce its script (the internal state representing the speech). First, let’s look at some commonly-used definitions first.
+
+Markov process/Markov chains
+A first-order Markov process is a stochastic process in which the future state solely depends on the current state only. The first-order Markov process is often simply called the Markov process. If it is in a discrete space, it is called the Markov chain.
+The assumption of the Markov process may not be true in reality. But even it is not true, we can model extra states in the system to make it closer to the Markov process sometimes. In practice, the Markov process can be an appropriate approximation in solving complex ML and reinforcement learning problems. In addition, the probability of the transition from one state to another can be packed into a transition matrix like the one below:
+This transition matrix is also called the Markov matrix. The element ij is the probability of transiting from state j to state i. Note, some literature may use a transposed notation where each element is the probability of transiting from state i to j instead.
+
+The columns of a Markov matrix add up to one, i.e. the probability of reaching a state from any possible state is one. Once, it is defined as a matrix, we can use linear algebra and eigenvector to determine its stable state if existed, i.e. if we keep going for a long time, what is the probability of being at a particular state?
+
+To solve that, let’s have a quick review of eigenvectors first. Eigenvector v? and eigenvalue ?? of the matrix A fulfill the following relation. (Note, matrix A can have many eigenvectors.)
+Our state at time k+1 is related to the previous step by the Markov matrix which the stable state is determined with k approaches ?.
+
+Consider a vector v? in ??. We can represent it using the eigenvectors of A. Using the equation above, the state of v at time step k+1 will become (the inner product of two different eigenvectors equals zero)
+If v converges in time, v will have a stable state. u? can be chosen to be unit vectors. In order for v to converge, eigenvalues ?? must be smaller or equal to 1. Otherwise, ?v? will continue to grow.
+
+A Markov matrix always has an eigenvalue 1. All other eigenvalues will have a magnitude smaller or equal to 1. Let’s say, the eigenvector u? (say [0.2, 0.5, 0.3]) has an eigenvalue of 1. Then, u? will be the stable state, i.e. we have 0.2, 0.5, and 0.3 chance to be in states 1, 2, or 3 respectively as the time approaches infinity. Note, the solution is independent of the initial state. We end up with the same target distribution regardless of where we start. (More details can be found here.) In theory, we can have more than one eigenvectors with eigenvalues equal to one. However, in practice, real problems usually have only one. In fact, if all elements in the matrix are greater than zero, there is exactly one eigenvector with eigenvalue equals to one.
+
+Random walk
+
+Calculating an exact solution can be computationally intensive. Alternatively, Markov processes can be solved using random walks. Let’s say we drop off 100 shoppers randomly around the downtown area in San Franciso. We provide a transition matrix to show the probability of where the shoppers may head next in the current position. Eventually, we can spot where most interesting shops are located.
+
+This strategy allows us to use local information to understand the general structure of the data. In many ML problems, it is much easier to collect. We don’t need to understand the structure of the data. We don’t need to understand how the city plans its shopping districts. Just look around and see what may be more interesting. In addition, the transition matrix is mostly sparse in many problems. This random walk concept is very popular in ranking or making product recommendations.
+
+As we continue the iterations, our random walk will converge to the stable state that we are interested in. For very large scale problems, this may be easier to execute and to compute.
+
+Hidden Markov Model (HMM)
+In many ML problems, we assume the sampled data is i.i.d. This simplifies the maximum likelihood estimation (MLE) and makes the math much simpler to solve. But for the time sequence model, states are not completely independent. If I am happy now, I will be more likely to stay happy tomorrow.
+
+In many ML problems, the states of a system may not be observable or fully observable. But we can get insights about this internal state through the observables. For example, if I am happy, there is a 40% chance that I will go to a party. But there is a 10% chance that I will be found at a party when I am sad too. With HMM, we determine the internal state (happy or sad) by making observations — where I was found.
+
+HMM models a process with a Markov process.
+
+It includes the initial state distribution ? (the probability distribution of the initial state)
+The transition probabilities A from one state (xt) to another.
+HMM also contains the likelihood B of the observation (yt) given a hidden state. Matrix B is called the emission probabilities. It demonstrates the probability of our observation given a specific internal state.
+The complexity of the problem is that the same observations may be originated from different states (happy or not).
+The equation above uses the transition probability and the emission probability to compute the probability of the internal state based on all observations.
+
+Depending on the situation, we usually ask three different types of questions regarding an HMM problem.
+
+Likelihood: How likely are the observations based on the current model or the probability of being at a state at a specific time step.
+Decoding: Find the internal state sequence based on the current model and observations.
+Learning. Learn the HMM model.
+The remaining section details the solution. Read through it according to your level of interest.
+
+Likelihood (likelihood of the observation)
+
+Likelihood is to find the likelihood of observation Y.
+This is computationally intense. But we can do it smartly to avoid summing all possible state sequences one-by-one and to share results for other computations. Otherwise, the complexity will grow exponentially.
+
+Our strategy will employ a divide-and-conquer. In specifically, if we can express components recursively, we can break down the problem into intermediate steps and share results.
+
+In HMM, we solve the problem at time t by using the result from time t-1 and/or t+1. A circle below represents an HMM hidden state j at time t. So even the number of state sequence increases exponentially with time, we can solve it linear if we can express the calculation recursively with time.

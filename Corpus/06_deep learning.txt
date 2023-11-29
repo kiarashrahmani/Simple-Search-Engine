@@ -1,0 +1,77 @@
+What is Deep Learning?
+Deep learning is a method in artificial intelligence (AI) that teaches computers to process data in a way that is inspired by the human brain. Deep learning models can recognize complex patterns in pictures, text, sounds, and other data to produce accurate insights and predictions. You can use deep learning methods to automate tasks that typically require human intelligence, such as describing images or transcribing a sound file into text. 
+
+Why is deep learning important?
+Artificial intelligence (AI) attempts to train computers to think and learn as humans do. Deep learning technology drives many AI applications used in everyday products, such as the following:
+
+Digital assistants
+Voice-activated television remotes
+Fraud detection
+Automatic facial recognition
+It is also a critical component of emerging technologies such as self-driving cars, virtual reality, and more. 
+
+Deep learning models are computer files that data scientists have trained to perform tasks using an algorithm or a predefined set of steps. Businesses use deep learning models to analyze data and make predictions in various applications.
+
+What are the uses of deep learning?
+Deep learning has several use cases in automotive, aerospace, manufacturing, electronics, medical research, and other fields. These are some examples of deep learning:
+
+Self-driving cars use deep learning models to automatically detect road signs and pedestrians.
+Defense systems use deep learning to automatically flag areas of interest in satellite images.
+Medical image analysis uses deep learning to automatically detect cancer cells for medical diagnosis.
+Factories use deep learning applications to automatically detect when people or objects are within an unsafe distance of machines.
+You can group these various use cases of deep learning into four broad categories—computer vision, speech recognition, natural language processing (NLP), and recommendation engines.
+
+Computer vision
+Computer vision is the computer's ability to extract information and insights from images and videos. Computers can use deep learning techniques to comprehend images in the same way that humans do. Computer vision has several applications, such as the following:
+
+Content moderation to automatically remove unsafe or inappropriate content from image and video archives
+Facial recognition to identify faces and recognize attributes like open eyes, glasses, and facial hair
+Image classification to identify brand logos, clothing, safety gear, and other image details
+Speech recognition
+Deep learning models can analyze human speech despite varying speech patterns, pitch, tone, language, and accent. Virtual assistants such as Amazon Alexa and automatic transcription software use speech recognition to do the following tasks:
+
+Assist call center agents and automatically classify calls.
+Convert clinical conversations into documentation in real time.
+Accurately subtitle videos and meeting recordings for a wider content reach.
+Natural language processing
+Computers use deep learning algorithms to gather insights and meaning from text data and documents. This ability to process natural, human-created text has several use cases, including in these functions:
+
+Automated virtual agents and chatbots
+Automatic summarization of documents or news articles
+Business intelligence analysis of long-form documents, such as emails and forms
+Indexing of key phrases that indicate sentiment, such as positive and negative comments on social media
+Recommendation engines
+Applications can use deep learning methods to track user activity and develop personalized recommendations. They can analyze the behavior of various users and help them discover new products or services. For example, many media and entertainment companies, such as Netflix, Fox, and Peacock, use deep learning to give personalized video recommendations.
+
+How does deep learning work?
+Deep learning algorithms are neural networks that are modeled after the human brain. For example, a human brain contains millions of interconnected neurons that work together to learn and process information. Similarly, deep learning neural networks, or artificial neural networks, are made of many layers of artificial neurons that work together inside the computer.
+
+Artificial neurons are software modules called nodes, which use mathematical calculations to process data. Artificial neural networks are deep learning algorithms that use these nodes to solve complex problems.
+
+What are the components of a deep learning network?
+The components of a deep neural network are the following.
+
+Input layer
+An artificial neural network has several nodes that input data into it. These nodes make up the input layer of the system.
+
+Hidden layer
+The input layer processes and passes the data to layers further in the neural network. These hidden layers process information at different levels, adapting their behavior as they receive new information. Deep learning networks have hundreds of hidden layers that they can use to analyze a problem from several different angles.
+
+For example, if you were given an image of an unknown animal that you had to classify, you would compare it with animals you already know. For example, you would look at the shape of its eyes and ears, its size, the number of legs, and its fur pattern. You would try to identify patterns, such as the following:
+
+The animal has hooves, so it could be a cow or deer.
+The animal has cat eyes, so it could be some type of wild cat.
+The hidden layers in deep neural networks work in the same way. If a deep learning algorithm is trying to classify an animal image, each of its hidden layers processes a different feature of the animal and tries to accurately categorize it.
+
+Output layer
+The output layer consists of the nodes that output the data. Deep learning models that output "yes" or "no" answers have only two nodes in the output layer. On the other hand, those that output a wider range of answers have more nodes. 
+
+What is deep learning in the context of machine learning?
+Deep learning is a subset of machine learning. Deep learning algorithms emerged in an attempt to make traditional machine learning techniques more efficient. Traditional machine learning methods require significant human effort to train the software. For example, in animal image recognition, you need to do the following:
+
+Manually label hundreds of thousands of animal images.
+Make the machine learning algorithms process those images.
+Test those algorithms on a set of unknown images.
+Identify why some results are inaccurate.
+Improve the dataset by labeling new images to improve result accuracy.
+This process is called supervised learning. In supervised learning, result accuracy improves only when you have a broad and sufficiently varied dataset. For instance, the algorithm might accurately identify black cats but not white cats because the training dataset had more images of black cats. In that case, you would need to label more white cat images and train the machine learning models once again.

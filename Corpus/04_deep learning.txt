@@ -1,0 +1,24 @@
+What is deep learning?
+Deep learning is a type of machine learning and artificial intelligence (AI) that imitates the way humans gain certain types of knowledge. Deep learning models can be taught to perform classification tasks and recognize patterns in photos, text, audio and other various data. It is also used to automate tasks that would normally need human intelligence, such as describing images or transcribing audio files.
+
+Deep learning is an important element of data science, including statistics and predictive modeling. It is extremely beneficial to data scientists who are tasked with collecting, analyzing and interpreting large amounts of data; deep learning makes this process faster and easier.
+
+Where human brains have millions of interconnected neurons that work together to learn information, deep learning features neural networks constructed from multiple layers of software nodes that work together. Deep learning models are trained using a large set of labeled data and neural network architectures.
+
+Deep learning enables a computer to learn by example. To understand deep learning, imagine a toddler whose first word is dog. The toddler learns what a dog is -- and is not -- by pointing to objects and saying the word dog. The parent says, "Yes, that is a dog," or, "No, that is not a dog." As the toddler continues to point to objects, he becomes more aware of the features that all dogs possess. What the toddler is doing, without knowing it, is clarifying a complex abstraction: the concept of dog. They are doing this by building a hierarchy in which each level of abstraction is created with knowledge that was gained from the preceding layer of the hierarchy.
+
+Why is deep learning important?
+Deep learning requires both a large amount of labeled data and computing power. If an organization can accommodate for both needs, deep learning can be used in areas such as digital assistants, fraud detection and facial recognition. Deep learning also has a high recognition accuracy, which is crucial for other potential applications where safety is a major factor, such as in autonomous cars or medical devices.
+
+How deep learning works?
+Computer programs that use deep learning go through much the same process as a toddler learning to identify a dog, for example.
+
+Deep learning programs have multiple layers of interconnected nodes, with each layer building upon the last to refine and optimize predictions and classifications. Deep learning performs nonlinear transformations to its input and uses what it learns to create a statistical model as output. Iterations continue until the output has reached an acceptable level of accuracy. The number of processing layers through which data must pass is what inspired the label deep.
+
+In traditional machine learning, the learning process is supervised, and the programmer must be extremely specific when telling the computer what types of things it should be looking for to decide if an image contains a dog or does not contain a dog. This is a laborious process called feature extraction, and the computer's success rate depends entirely upon the programmer's ability to accurately define a feature set for dog. The advantage of deep learning is the program builds the feature set by itself without supervision.
+
+Initially, the computer program might be provided with training data -- a set of images for which a human has labeled each image dog or not dog with metatags. The program uses the information it receives from the training data to create a feature set for dog and build a predictive model. In this case, the model the computer first creates might predict that anything in an image that has four legs and a tail should be labeled dog. Of course, the program is not aware of the labels four legs or tail. It simply looks for patterns of pixels in the digital data. With each iteration, the predictive model becomes more complex and more accurate.
+
+Unlike the toddler, who takes weeks or even months to understand the concept of dog, a computer program that uses deep learning algorithms can be shown a training set and sort through millions of images, accurately identifying which images have dogs in them, within a few minutes.
+
+To achieve an acceptable level of accuracy, deep learning programs require access to immense amounts of training data and processing power, neither of which were easily available to programmers until the era of big data and cloud computing. Because deep learning programming can create complex statistical models directly from its own iterative output, it is able to create accurate predictive models from large quantities of unlabeled, unstructured data.

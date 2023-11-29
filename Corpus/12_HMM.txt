@@ -1,0 +1,52 @@
+Hidden Markov models (HMMs) are a type of statistical modeling that has been used for several years. They have been applied in different fields such as medicine, computer science, and data science. The Hidden Markov model (HMM) is the foundation of many modern-day data science algorithms. It has been used in data science to make efficient use of observations for successful predictions or decision-making processes. This blog post will cover hidden Markov models with real-world examples and important concepts related to hidden Markov models.
+What are Markov Models?
+Markov models are named after Andrey Markov, who first developed them in the early 1900s. Markov models are a type of probabilistic model that is used to predict the future state of a system, based on its current state. In other words, Markov models are used to predict the future state based on the current hidden or observed states. Markov model is a finite-state machine where each state has an associated probability of being in any other state after one step. They can be used to model real-world problems where hidden and observable states are involved. Markov models can be classified into hidden and observable based on the type of information available to use for making predictions or decisions. Hidden Markov models deal with hidden variables that cannot be directly observed but only inferred from other observations, whereas in an observable model also termed as Markov chain, hidden variables are not involved.
+
+To better understand Markov models, let’s look at an example. Say you have a bag of marbles that contains four marbles: two red marbles and two blue marbles. You randomly select a marble from the bag, note its color, and then put it back in the bag. After repeating this process several times, you begin to notice a pattern: The probability of selecting a red marble is always two out of four, or 50%. This is because the probability of selecting a particular color of marble is determined by the number of that color of marble in the bag. In other words, the past history (i.e., the contents of the bag) determines the future state (i.e., the probability of selecting a particular color of marble).
+This example illustrates the concept of a Markov model: the future state of a system is determined by its current state and past history. In the case of the bag of marbles, the current state is determined by the number of each color of marble in the bag. The past history is represented by the contents of the bag, which determine the probabilities of selecting each color of marble.
+
+Markov models have many applications in the real world, including predicting the weather, stock market prices, and the spread of disease. Markov models are also used in natural language processing applications such as speech recognition and machine translation. In speech recognition, Markov models are used to identify the correct word or phrase based on the context of the sentence. In machine translation, Markov models are used to select the best translation for a sentence based on the translation choices made for previous sentences in the text.
+
+What is Markov Chain?
+Markov chains, named after Andrey Markov, can be thought of as a machine or a system that hops from one state to another, typically forming a chain. Markov chains have the Markov property, which states that the probability of moving to any particular state next depends only on the current state and not on the previous states.
+
+A Markov chain consists of three important components:
+
+Initial probability distribution: An initial probability distribution over states, ?i is the probability that the Markov chain will start in a certain state i. Some states j may have ?j = 0, meaning that they cannot be initial states
+One or more states
+Transition probability distribution: A transition probability matrix A where each [latex]a_{ij}[/latex] represents the probability of moving from state I to state j
+The diagram below represents a Markov chain where there are three states representing the weather of the day (cloudy, rainy, and sunny). And, there are transition probabilities representing the weather of the next day given the weather of the current day.
+
+There are three different states such as cloudy, rain, and sunny. The following represent the transition probabilities based on the above diagram:
+
+If sunny today, then tomorrow:
+50% probability for sunny
+10% probability for rainy
+40% probability for cloudy
+If rainy today, then tomorrow:
+10% probability for sunny
+60% probability for rainy
+30% probability for cloudy
+If cloudy today, then tomorrow:
+40% probability for sunny
+50% probability for rainy
+10% probability for cloudy
+Using this Markov chain, what is the probability that the Wednesday will be cloudy if today is sunny. The following are different transitions that can result in a cloudy Wednesday given today (Monday) is sunny.
+
+Sunny – Sunny (Tuesday) – Cloudy (Wednesday): The probability to a cloudy Wednesday can be calculated as 0.5 x 0.4 = 0.2
+Sunny – Rainy (Tuesday) – Cloudy (Wednesday): The probability of a cloudy Wednesday can be calculated as 0.1 x 0.3 = 0.03
+Sunny – Cloudy (Tuesday) – Cloudy (Wednesday): The probability of a cloudy Wednesday can be calculated as 0.4 x 0.1 = 0.04
+The total probability of a cloudy Wednesday = 0.2 + 0.03 + 0.04 = 0.27.
+
+As shown above, the Markov chain is a process with a known finite number of states in which the probability of being in a particular state is determined only by the previous state.
+
+What are Hidden Markov models (HMM)?
+The hidden Markov model (HMM) is another type of Markov model where there are few states which are hidden. This is where HMM differs from a Markov chain. HMM is a statistical model in which the system being modeled are Markov processes with unobserved or hidden states. It is a hidden variable model which can give an observation of another hidden state with the help of the Markov assumption. The hidden state is the term given to the next possible variable which cannot be directly observed but can be inferred by observing one or more states according to Markov’s assumption. Markov assumption is the assumption that a hidden variable is dependent only on the previous hidden state. Mathematically, the probability of being in a state at a time t depends only on the state at the time (t-1). It is termed a limited horizon assumption. Another Markov assumption states that the conditional distribution over the next state, given the current state, doesn’t change over time. This is also termed a stationary process assumption.
+
+A Markov model  is made up of two components: the state transition and hidden random variables that are conditioned on each other. However, A hidden Markov model consists of five important components:
+
+Initial probability distribution: An initial probability distribution over states, ?i is the probability that the Markov chain will start in state i. Some states j may have ?j = 0, meaning that they cannot be initial states. The initialization distribution defines each hidden variable in its initial condition at time t=0 (the initial hidden state).
+One or more hidden states
+Transition probability distribution: A transition probability matrix where each [latex]a_{ij}[/latex] represents the probability of moving from state i to state j. The transition matrix is used to show the hidden state to hidden state transition probabilities.
+A sequence of observations
+Emission probabilities: A sequence of observation likelihoods, also called emission probabilities, each expressing the probability of an observation [latex]o_{i}[/latex] being generated from a state I. The emission probability is used to define the hidden variable in terms of its next hidden state. It represents the conditional distribution over an observable output for each hidden state at time t=0.

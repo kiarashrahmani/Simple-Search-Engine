@@ -1,0 +1,54 @@
+Images define the world, each image has its own story, it contains a lot of crucial information that can be useful in many ways. This information can be obtained with the help of the technique known as Image Processing.
+
+It is the core part of computer vision which plays a crucial role in many real-world examples like robotics, self-driving cars, and object detection. Image processing allows us to transform and manipulate thousands of images at a time and extract useful insights from them. It has a wide range of applications in almost every field. 
+
+Python is one of the widely used programming languages for this purpose. Its amazing libraries and tools help in achieving the task of image processing very efficiently. 
+
+This article will teach you about classical algorithms, techniques, and tools to process the image and get the desired output.
+
+Let’s get into it!
+
+What is image processing?
+As the name says, image processing means processing the image and this may include many different techniques until we reach our goal.
+
+The final output can be either in the form of an image or a corresponding feature of that image. This can be used for further analysis and decision making.
+
+But what is an image?
+
+An image can be represented as a 2D function F(x,y) where x and y are spatial coordinates. The amplitude of F at a particular value of x,y is known as the intensity of an image at that point. If x,y, and the amplitude value is finite then we call it a digital image. It is an array of pixels arranged in columns and rows. Pixels are the elements of an image that contain information about intensity and color. An image can also be represented in 3D where x,y, and z become spatial coordinates. Pixels are arranged in the form of a matrix. This is known as an RGB image.
+
+Digital image processing consists of the manipulation of images using digital computers. Its use has been increasing exponentially in the last decades. Its applications range from medicine to entertainment, passing by geological processing and remote sensing. Multimedia systems, one of the pillars of the modern information society, rely heavily on digital image processing.
+
+The discipline of digital image processing is a vast one, encompassing digital signal processing techniques as well as techniques that are specific to images. An image can be regarded as a function f (x, y) of two continuous variables x and y. To be processed digitally, it has to be sampled and transformed into a matrix of numbers. Since a computer represents the numbers using finite precision, these numbers have to be quantized to be represented digitally. Digital image processing consists of the manipulation of those finite precision numbers. The processing of digital images can be divided into several classes: image enhancement, image restoration, image analysis, and image compression. In image enhancement, an image is manipulated, mostly by heuristic techniques, so that a human viewer can extract useful information from it. Image restoration techniques aim at processing corrupted images from which there is a statistical or mathematical description of the degradation so that it can be reverted. Image analysis techniques permit that an image be processed so that information can be automatically extracted from it. Examples of image analysis are image segmentation, edge extraction, and texture and motion analysis. An important characteristic of images is the huge amount of information required to represent them. Even a gray-scale image of moderate resolution, say 512 × 512, needs 512 × 512 × 8 ? 2 × 106 bits for its representation. Therefore, to be practical to store and transmit digital images, one needs to perform some sort of image compression, whereby the redundancy of the images is exploited for reducing the number of bits needed in their representation.
+
+In what follows, we provide a brief description of digital image processing techniques. Section 4.1 deals with image sampling, and Section 4.2 describes image quantization. In Section 4.3, some image enhancement techniques are given. Section 4.4 analyzes image restoration. Image compression, or coding, is presented in Section 4.5. Finally, Section 4.6 introduces the main issues involved in image analysis.
+
+This chapter deals with the manipulation and analysis of images by computer. In image processing, both the input and the output are images, the output being, for example, an approximated or improved version of the input. In image analysis (also known by such names as pictorial pattern recognition, image understanding, and computer vision), the input is an image and the output is (typically) a description of the scene that gave rise to the image. Computer graphics, which is not covered in this chapter, is the inverse of image analysis: The input is a scene description, and the output is an image of the scene as it would appear from a given viewpoint.
+
+An image is defined by specifying how its value (brightness, color, etc.) varies from point to point—in other words, by a function of two variables defined over an “image plane.” Before an image can be processed and analyzed by (digital) computer, it must be converted into a discrete array of numbers each of which represents the value at a given point. This process of conversion is called digitization (Section II).
+
+A digitized image can be viewed as a matrix of gray-level values. To understand/analyze the structure of this matrix, image models and image transforms have been used. Image models attempt to describe the image data quantatively, while image transforms enable the analysis of the image data in the transform domain for various applications such as compression, restoration, and filtering.Image models and representations are discussed in Section III.
+
+To represent the input image with sufficient accuracy, the array of numbers must usually be quite large—for example, about 500 × 500 in the case of a television image. Image compression (or coding) deals with methods of reducing this large quantity of data without sacrificing important information about the image (Section IV).
+
+One of the central goals of image processing is to improve the appearance of the image—for example, by increasing contrast, reducing blur, or removing noise. Image enhancement (Section V) deals with methods of improving the appearance of an image. More specifically, image restoration (Section VI) is concerned with estimating image degradations and attempting to correct them.
+
+Another important branch of image processing is image reconstruction from projections (Section VII). Here we are given a set of images (e.g., X rays) representing projections of a given volume, and the task is to compute and display images representing cross sections of that volume.
+
+Comparison or matching of images is an important tool in both image processing and analysis. Section VIII discusses image matching and registration and depth measurement by comparison of images taken from different positions (stereomapping).
+
+Section IX summarizes methods for the analysis of image sequences. Techniques for motion compensation, detection and tracking of moving objects, and recovery of scene structure from motion using optic flow and discrete features are discussed.
+
+The brightness of an image at a point depends on many factors, including the illumination, reflectivity, and surface orientation of the corresponding surface point in the scene. Section X discusses methods of recovering these “intrinsic” scene characteristics from an image by analyzing shading, texture, or shapes in the image.
+
+Image analysis usually begins with feature detection or segmentation—the extraction of parts of an image, such as edges, curves, or regions, that are relevant to its description. Techniques for singling out significant parts of an image are reviewed in Section XI. Methods of compactly representing image parts for computer manipulation, as well as methods of decomposing image parts based on geometric criteria and of computing geometric properties of image parts, are treated in Section XII.
+
+Section XIII deals with image description, with an emphasis on the problem of recognizing objects in an image. It reviews properties and relations, relational structures, models, and knowledge-based image analysis.
+
+A chapter such as this would not be complete without some discussion of architectures designed for efficient processing of images. The eighties witnessed an explosion of parallel algorithms and architectures for image processing and analysis; especially noteworthy were hypercube-connected machines. In the early nineties attention was focused on special processors such as pyramid machines. Recently, emphasis is being given to embedded processors and field-programmable gate arrays. Section XIV presents a summary of these developments.
+
+The treatment in this chapter is concept-oriented; applications are not discussed, and the use of mathematics has been minimized, although some understanding of Fourier transforms, stochastic processes, estimation theory, and linear algebra is occasionally assumed. The Bibliography lists basic textbooks, as well as a recent survey article that celebrated 50 years of progress in image processing and analysis.
+
+Since an earlier version of this chapter appeared in 1986, image processing and analysis have grown so dramatically in depth and breadth that it is nearly impossible to cover all their subareas in detail. To adhere to our page limitations, we have made a conscientious selection of topics for discussion. We avoid discussion of topics such as scanners, display devices, and hardware and software issues. On the other hand, since the mideighties, much to our delight, the field has been supported by a strong underlying analytical framework based on mathematics, statistics, and physics. We point out the influence of these fields on image processing, analysis, understanding, and computer vision.
+
+

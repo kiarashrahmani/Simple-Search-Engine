@@ -1,0 +1,55 @@
+An Introduction to Recurrent Neural Networks and the Math That Powers Them:When it comes to sequential or time series data, traditional feedforward networks cannot be used for learning and prediction. A mechanism is required to retain past or historical information to forecast future values. Recurrent neural networks, or RNNs for short, are a variant of the conventional feedforward artificial neural networks that can deal with sequential data and can be trained to hold knowledge about the past.
+
+After completing this tutorial, you will know:
+
+Recurrent neural networks
+What is meant by unfolding an RNN
+How weights are updated in an RNN
+Various RNN architectures
+Kick-start your project with my book Building Transformer Models with Attention. It provides self-study tutorials with working code to guide you into building a fully-working transformer model that can
+translate sentences from one language to another...
+
+Let’s get started.
+
+This tutorial is divided into two parts; they are:
+
+The working of an RNN;
+Unfolding in time;
+Backpropagation through time algorithm;
+Different RNN architectures and variants.
+
+An Introduction to Recurrent Neural Networks and the Math That Powers Them
+by Mehreen Saeed on January 6, 2023 in Attention 7
+Tweet Tweet  Share
+When it comes to sequential or time series data, traditional feedforward networks cannot be used for learning and prediction. A mechanism is required to retain past or historical information to forecast future values. Recurrent neural networks, or RNNs for short, are a variant of the conventional feedforward artificial neural networks that can deal with sequential data and can be trained to hold knowledge about the past.
+
+After completing this tutorial, you will know:
+
+Recurrent neural networks
+What is meant by unfolding an RNN
+How weights are updated in an RNN
+Various RNN architectures
+Kick-start your project with my book Building Transformer Models with Attention. It provides self-study tutorials with working code to guide you into building a fully-working transformer model that can
+translate sentences from one language to another...
+
+Let’s get started.
+
+
+An introduction to recurrent neural networks and the math that powers Them. Photo by Mehreen Saeed, some rights reserved.
+
+Tutorial Overview
+This tutorial is divided into two parts; they are:
+
+The working of an RNN
+Unfolding in time
+Backpropagation through time algorithm
+Different RNN architectures and variants
+
+
+This tutorial assumes that you are already familiar with artificial neural networks and the backpropagation algorithm. If not, you can go through this very nice tutorial, Calculus in Action: Neural Networks, by Stefania Cristina. The tutorial also explains how a gradient-based backpropagation algorithm is used to train a neural network.
+
+What Is a Recurrent Neural Network?
+A recurrent neural network (RNN) is a special type of artificial neural network adapted to work for time series data or data that involves sequences. Ordinary feedforward neural networks are only meant for data points that are independent of each other. However, if we have data in a sequence such that one data point depends upon the previous data point, we need to modify the neural network to incorporate the dependencies between these data points. RNNs have the concept of “memory” that helps them store the states or information of previous inputs to generate the next output of the sequence.
+
+Hence, in the feedforward pass of an RNN, the network computes the values of the hidden units and the output after 
+ time steps. The weights associated with the network are shared temporally. Each recurrent layer has two sets of weights: one for the input and the second for the hidden unit. The last feedforward layer, which computes the final output for the kth time step, is just like an ordinary layer of a traditional feedforward network.
